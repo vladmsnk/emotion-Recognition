@@ -36,5 +36,5 @@ class Extract:
         self.extract()
         self.makedata()
         self.add_len()
-        self.data_info()
+        self.add_info()
         self.save_data()
