@@ -1,1 +1,1 @@
-# kursach
+# The term paper about emotion recoginition 
