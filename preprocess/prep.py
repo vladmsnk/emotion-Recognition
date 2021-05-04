@@ -39,4 +39,8 @@ class Preprocess(Config):
         y = np_utils.to_categorical(y,num_classes =10 )
         return X, y
 
+    def __call__(self):
+        self.load_data()
+        self.info()
+        self.build_rand_feat()
 
