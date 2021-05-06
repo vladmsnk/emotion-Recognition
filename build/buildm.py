@@ -27,6 +27,7 @@ class Build:
         model.add(Dense(64, activation='relu'))
         model.add(Dense(6, activation='softmax'))
         model.summary()
+
         model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['acc'])
         return model
 
