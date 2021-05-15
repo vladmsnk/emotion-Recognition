@@ -16,15 +16,15 @@ class Extract:
         maindata.set_index('filename', inplace=True)
         return maindata
 
-    def _makedata(self):
+    def __makedata(self):
          self.data = self.extract()
 
-    def _add_len(self):
+    def __add_len(self):
         for f in self.data.index:
             rate, signal = wavfile.read(self.path+f)
             self.data.at[f,'length'] = signal.shape[0] / rate #signal per second
 
-    def _add_info(self):
+    def __add_info(self):
         self.classes = list(np.unique(self.data.emotion))
         self.class_distr = self.data.groupby(['emotion'])['length'].mean()
 
@@ -34,7 +34,7 @@ class Extract:
 
     def __call__(self):
         self.extract()
-        self.makedata()
-        self._add_len()
-        self.add_info()
+        self.__makedata()
+        self.__add_len()
+        self.__add_info()
         self.save_data()
