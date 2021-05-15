@@ -30,7 +30,7 @@ class Extract:
 
 
     def save_data(self):
-        self.data.to_csv('../data/maindata.csv')
+        self.data.to_csv('data/maindata.csv')
 
     def __change1(self):
         self.data.loc[(self.data['emotion'] == 'DIS'), 'emotion'] = 'ANG'

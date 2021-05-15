@@ -10,7 +10,8 @@ from keras.utils import np_utils
 class Preprocess(Config):
     def load_data(self):
         self.df = pd.read_csv(self.savedatapath)
-    def info(self):
+        self.df.set_index('filename',inplace =True)
+    def _info(self):
         self.n_samples = 2*int(self.df['length'].sum()/ 0.1)
         self.class_dist = self.df.groupby(['emotion'])['length'].mean()
         self.prob_dist = self.class_dist / self.class_dist.sum()
@@ -29,18 +30,18 @@ class Preprocess(Config):
             rand_index = np.random.randint(0, wav.shape[0] - self.step)
             sample = wav[rand_index: rand_index + self.step]
             X_sample = mfcc(sample, rate, numcep= self.nfeat, nfilt = self.nfilt , nfft = self.nfft).T
-            minimum = min(np.amin(X_sample, minimum))
-            maximum = max(np.amax(X_sample, maximum))
+            minimum = min(np.amin(X_sample), minimum)
+            maximum = max(np.amax(X_sample), maximum)
             X.append(X_sample)
             y.append(self.classes.index(emotion))
         X, y = np.array(X), np.array(y)
         X = (X - minimum) / (maximum - minimum)
         X = X.reshape(X.shape[0], X.shape[1], X.shape[2],1)
-        y = np_utils.to_categorical(y,num_classes =10 )
+        y = np_utils.to_categorical(y,num_classes =4)
         return X, y
 
     def __call__(self):
         self.load_data()
-        self.info()
-        self.build_rand_feat()
+        self._info()
+
 

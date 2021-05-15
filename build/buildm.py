@@ -16,16 +16,16 @@ class Build:
 
     def creat_conv_model(self):
         model = Sequential()
-        model.add(Conv2D(16 ,(3,3), activation='relu', strides= (1,1), padding='same',input_shape=self.input_shape))
-        model.add(Conv2D(32,(3,3),activation='relu', strides=(1,1), padding='same'))
-        model.add(Conv2D(64,(3,3),activation='relu', strides=(1,1), padding='same'))
+        model.add(Conv2D(16, (3,3), activation='relu', strides= (1,1), padding='same',input_shape=self.input_shape))
+        model.add(Conv2D(32, (3,3),activation='relu', strides=(1,1), padding='same'))
+        model.add(Conv2D(64, (3,3),activation='relu', strides=(1,1), padding='same'))
         model.add(Conv2D(128,(3,3),activation='relu', strides=(1,1), padding='same'))
         model.add(MaxPool2D((2,2)))
         model.add(Dropout(0.5))
         model.add(Flatten())
         model.add(Dense(128, activation='relu'))
         model.add(Dense(64, activation='relu'))
-        model.add(Dense(6, activation='softmax'))
+        model.add(Dense(4, activation='softmax'))
         model.summary()
 
         model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['acc'])
