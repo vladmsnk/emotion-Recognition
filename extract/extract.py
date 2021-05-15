@@ -32,9 +32,15 @@ class Extract:
     def save_data(self):
         self.data.to_csv('../data/maindata.csv')
 
+    def __change1(self):
+        self.data.loc[(self.data['emotion'] == 'DIS'), 'emotion'] = 'ANG'
+        self.data.loc[(self.data['emotion'] == 'FEA'), 'emotion'] = 'SAD'
+
     def __call__(self):
         self.extract()
         self.__makedata()
         self.__add_len()
         self.__add_info()
+        self.__change1()
         self.save_data()
+
