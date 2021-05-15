@@ -1,4 +1,4 @@
-
+import os
 class Config:
     def __init__(self, nfilt = 26, nfeat = 13, nfft = 512 , ratec = 16000):
         self.nfilt = nfilt
@@ -10,6 +10,10 @@ class Config:
         self.savedatapath = 'data/maindata.csv'
         self.n_epoch = 75
         self.batch_size = 32
+        self.model_path = '/model.model'
+        self.p_path = '/pickle.p'
+
+
 
 
 

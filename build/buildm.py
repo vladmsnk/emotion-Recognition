@@ -2,8 +2,8 @@
 import numpy as np
 from sklearn.utils.class_weight import compute_class_weight
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPool2D, Flatten, LSTM,Dropout
-from keras.layers import Dense
+from keras.layers import Conv2D, MaxPool2D, Flatten, LSTM,Dropout,Conv1D,AveragePooling1D
+from keras.layers import Dense,MaxPooling1D
 
 class Build:
     def __init__(self,X , y):
@@ -11,7 +11,6 @@ class Build:
         self.y = y
         self.y_flat = np.argmax(y, axis =1 )
         self.input_shape = (X.shape[1], X.shape[2],1)
-        self.class_weight = compute_class_weight('balanced',np.unique(self.y_flat), self.y_flat)
 
 
     def creat_conv_model(self):
@@ -30,5 +29,6 @@ class Build:
 
         model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['acc'])
         return model
+
 
 
