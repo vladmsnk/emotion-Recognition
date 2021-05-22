@@ -69,8 +69,5 @@ class Preprocess():
         self.__load_data()
         self.__info()
 
-p = Preprocess()
-p()
-X,y = p.build_rand_feat()
 
 
