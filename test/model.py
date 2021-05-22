@@ -4,6 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from keras.utils import np_utils
+from keras.callbacks import ModelCheckpoint
+from configs.config import Config
 from python_speech_features import mfcc, logfbank
 from scipy.io import wavfile
 import librosa, librosa.display
