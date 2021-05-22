@@ -3,34 +3,29 @@ from os.path import isfile, join
 import pandas as pd
 import numpy as np
 from scipy.io import wavfile
+from configs.config import Config
 
-class Extract:
-    def __init__(self, path):
-        self.path = path
-
+class Extract():
     def extract(self):
-        filenames = [f for f in listdir(self.path) if isfile(join(self.path, f))]
+        filenames = [f for f in listdir(Config.audpath) if isfile(join(Config.audpath, f))]
         emotion = pd.DataFrame(filenames).loc[:, 0].apply(lambda x: x.split('_')[2])
         filnm = pd.Series(filenames)
         maindata = pd.concat({"filename": filnm, "emotion": emotion}, axis=1)
         maindata.set_index('filename', inplace=True)
-        return maindata
-
-    def __makedata(self):
-         self.data = self.extract()
+        self.data = maindata
 
     def __add_len(self):
         for f in self.data.index:
-            rate, signal = wavfile.read(self.path+f)
-            self.data.at[f,'length'] = signal.shape[0] / rate #signal per second
+            rate, signal = wavfile.read(Config.audpath+f)
+            self.data.at[f,'length'] = signal.shape[0] / rate  #signal per second
 
     def __add_info(self):
         self.classes = list(np.unique(self.data.emotion))
         self.class_distr = self.data.groupby(['emotion'])['length'].mean()
 
 
-    def save_data(self):
-        self.data.to_csv('data/maindata.csv')
+    def __save_data(self):
+        self.data.to_csv(Config.savedatapath)
 
     def __change1(self):
         self.data.loc[(self.data['emotion'] == 'DIS'), 'emotion'] = 'ANG'
@@ -38,9 +33,7 @@ class Extract:
 
     def __call__(self):
         self.extract()
-        self.__makedata()
         self.__add_len()
         self.__add_info()
         self.__change1()
-        self.save_data()
-
+        self.__save_data()
