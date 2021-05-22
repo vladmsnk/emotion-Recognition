@@ -1,20 +1,16 @@
 import os
 class Config:
-    def __init__(self, nfilt = 26, nfeat = 13, nfft = 512 , ratec = 16000):
-        self.nfilt = nfilt
-        self.nfeat = nfeat
-        self.nfft = nfft
-        self.ratec = ratec
-        self.step = int(ratec /10)
-        self.audpath = 'data/AudioWAV/'
-        self.savedatapath = 'data/maindata.csv'
-        self.n_epoch = 75
-        self.batch_size = 32
-        self.model_path = '/model.model'
-        self.p_path = '/pickle.p'
-
-
-
-
+    nfilt = 26
+    nfeat = 13
+    nfft = 512
+    ratec = 16000
+    step = int(ratec /10)
+    n_epoch = 10
+    batch_size = 32
+    model_path = '../model/mod.model'
+    p_path1 = '../pickle/pickle1.p'
+    p_path2 = '../pickle/pickle2.p'
+    audpath = '../data/AudioWAV/'
+    savedatapath = '../data/maindata.csv'
 
 
