@@ -43,5 +43,3 @@ class Extract():
         self.__add_info()
         self.__change1()
         self.__save_data()
-e = Extract()
-e()

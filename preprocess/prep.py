@@ -48,7 +48,7 @@ class Preprocess():
             rand_index = np.random.randint(0, wav.shape[0] - Config.step)
             sample = wav[rand_index: rand_index + Config.step]
 
-            X_sample = mfcc(sample, rate, numcep= Config.nfeat, nfilt = 26, nfft = Config.nfft).T
+            X_sample = mfcc(sample, rate, numcep= Config.nfeat, nfilt = Config.nfilt, nfft = Config.nfft).T
             minimum = min(np.amin(X_sample), minimum)
             maximum = max(np.amax(X_sample), maximum)
             # Config.min = minimum
@@ -71,3 +71,7 @@ class Preprocess():
 
 
 
+p = Preprocess()
+p()
+classes = p.get_info()[4]
+print(classes)
