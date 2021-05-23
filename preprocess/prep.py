@@ -24,19 +24,10 @@ class Preprocess():
 
     def get_info(self):
         return (self.n_samples,self.class_dist,self.prob_dist,self.choices,self.classes)
-    # def __check_data(self):
-    #     if os.path.isfile(Config.p_path):
-    #         print("Loading existing date for model")
-    #         with open(Config.p_path, 'rb') as handle:
-    #             tmp =pickle.load(handle)
-    #             return tmp
-    #     else:
-    #         return None
+
 
     def build_rand_feat(self):
-        # tmp = self.__check_data()
-        # if tmp:
-        #     return tmp.data[0],tmp.data[1]
+
         X = []
         y = []
         minimum, maximum = float('inf'), -float('inf')
@@ -51,8 +42,6 @@ class Preprocess():
             X_sample = mfcc(sample, rate, numcep= Config.nfeat, nfilt = Config.nfilt, nfft = Config.nfft).T
             minimum = min(np.amin(X_sample), minimum)
             maximum = max(np.amax(X_sample), maximum)
-            # Config.min = minimum
-            # Config.max = maximum
             X.append(X_sample)
             y.append(self.classes.index(emotion))
         X, y = np.array(X), np.array(y)
@@ -71,7 +60,3 @@ class Preprocess():
 
 
 
-p = Preprocess()
-p()
-classes = p.get_info()[4]
-print(classes)
